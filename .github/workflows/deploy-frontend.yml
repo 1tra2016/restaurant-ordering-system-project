@@ -35,16 +35,12 @@ jobs:
       - name: Build
         run: npm run build --if-present
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v1
+      - name: Deploy to GitHub Pages (gh-pages branch)
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: build
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./code/frontend/web-admin/build
+          # If your build output is `dist`, change the path above to `./code/frontend/web-admin/dist`
 
 # Note: The workflow assumes the frontend build outputs to `build`.
 # If your project uses `dist` or another folder, update `path: build` above.
